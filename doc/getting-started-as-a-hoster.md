@@ -91,6 +91,9 @@ them every few months. It might even
 make sense to dual-boot your laptop or boot from a live disk which resets on boot to make sure everything you do with IndieHosters data
 is done in a sterile environment.
 
+Also: lock your screen when walking away from your laptop, and think about what someone could do with it if they were to steal your bag,
+or your smartphone.
+
 # Do I have to use this?
 You can of course use any folder structure and scripts you want, as long as it doesn't change the format of each user-data folder, so that
 your customers can still migrate at will between you and other IndieHosters. However, you might find some of the scripts in this repo
