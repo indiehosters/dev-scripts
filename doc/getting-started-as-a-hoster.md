@@ -17,7 +17,9 @@ create a folder structure as follows:
                 |
                 -- infrastructure
                 |
-                -- orchestration --- DNR
+                -- orchestration --- deploy-keys
+                |                 |
+                |                 -- DNR
                 |                 |
                 |                 -- DNS
                 |                 |
@@ -59,6 +61,8 @@ Note that although it's probably inevitable that you resell DNR and TLS services
 also run on a system that's decoupled from your actual servers, you may not be reselling DNS
 hosting. If you host DNS for your customer on server-wide bind services that directly read data from files on the per-user data folders,
 then you don't need this folder, and instead DNS data will be under `indiehosters/user-data`.
+
+The deploy-keys folder contains the authorized_keys file which is the first thing you scp to each server you add to your fleet.
 
 # User data
 Everything under `indiehosters/user-data` is data owned by one of your users. Which human owns which site is something you can administer
