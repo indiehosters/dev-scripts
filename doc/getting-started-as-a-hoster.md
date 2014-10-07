@@ -9,27 +9,27 @@ a certified as a branch of the IndieHosters franchise or not. To get started, on
 create a folder structure as follows:
 
 ```
-  indiehosters --- infrastructure
-                |
-                -- dockerfiles
+  indiehosters --- billing
                 |
                 -- dev-scripts
                 |
-                -- billing
+                -- dockerfiles
                 |
-                -- user-data --- live
-                |             |
-                |             -- backups
+                -- infrastructure
                 |
-                -- orchestration --- per-server
-                                  |
-                                  -- DNR
-                                  |
-                                  -- TLS
-                                  |
-                                  -- DNS
-                                  |
-                                  -- MON
+                -- orchestration --- DNR
+                |                 |
+                |                 -- DNS
+                |                 |
+                |                 -- MON
+                |                 |
+                |                 -- per-server
+                |                 |
+                |                 -- TLS
+                |
+                -- user-data --- backups
+                              |
+                              -- live
 ```
 The `infrastructure`, `dockerfiles`, and `dev-scripts` folders are the corresponding repos under https://github.com/indiehosters.
 

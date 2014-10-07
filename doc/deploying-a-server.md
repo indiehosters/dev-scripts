@@ -1,5 +1,9 @@
 # Deploying a server
 
+## Before you start
+Make sure you read [getting started](getting-started-as-a-hoster.md) first and created your `indiehosters` folder structure somewhere
+on your laptop.
+
 ### Prepare your orchestration data
 * Unless it's already there from a previous server deploy job, copy your laptop's public ssh key (probably in `~/.ssh/id_rsa.pub`) to `indiehosters/orchestration/root.ssh/authorized_keys`
 * Get a CoreOS server, for instance from [RackSpace](rackspace.com) or [Vultr](vultr.com).
