@@ -1,7 +1,5 @@
-dev-scripts
+Getting started as an IndieHosters hoster
 ===========
-
-Some random scripts to wo. WARNING: Not necessarily up to date!
 
 # Prerequisites
 
