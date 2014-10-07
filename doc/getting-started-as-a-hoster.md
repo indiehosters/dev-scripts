@@ -58,10 +58,12 @@ you run on your own servers.
 Note that although it's probably inevitable that you resell DNR and TLS services from some third party, and your monitoring would ideally
 also run on a system that's decoupled from your actual servers, you may not be reselling DNS
 hosting. If you host DNS for your customer on server-wide bind services that directly read data from files on the per-user data folders,
-then you don't need this folder, and instead DNS data will be under `indiehosters/infrastructure/user-data`.
+then you don't need this folder, and instead DNS data will be under `indiehosters/user-data`.
 
 # User data
-Everything under `indiehosters/infrastructure/user-data` is data owned by one of your users. This data is *untrusted* from your point of view, it is not owned by you as a hoster,
+Everything under `indiehosters/user-data` is data owned by one of your users. Which human owns which site is something you can administer
+by hand somehow in the `indiehosters/billing` folder.
+All user data is *untrusted* from your point of view, it is not owned by you as a hoster,
 and users may change it at any time (and then probably contact you for a backup whenever they mess up!). It makes sense to give users
 only read-only access to this data by default, and have a big "Are you sure? Warranty will be void!" warning before they can activate
 write-access to their own data (and then probably trigger an extra backup run just before allowing them to edit their own raw data).
