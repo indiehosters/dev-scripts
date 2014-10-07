@@ -21,7 +21,9 @@ create a folder structure as follows:
                 |                                 |
                 -- user-data --- live             -- TLS
                               |                   |
-                              -- backups          -- DNS
+                              -- backups          -- MON
+                                                  |
+                                                  -- DNS
 ```
 
 The `infrastructure`, `dockerfiles`, and `dev-scripts` folders are the corresponding repos under https://github.com/indiehosters.
@@ -31,21 +33,23 @@ The `infrastructure`, `dockerfiles`, and `dev-scripts` folders are the correspon
 The `hoster-data` folder will contain your orchestration data (what *should* be happening on each server, at each domain name
 registrar, and at each TLS certificate authority), and your billing data (data about your human customers, including contact info,
 who is in control of which product, which products were/should be added/removed on which dates, and history of all tech support
-issues of this customer, and if it's a paying customer of yours, then also the billing and payment history).
+issues of this customer, and if for paying customers also the billing and payment history).
 
-If you're used to working with git as a versioning tool, then it's a good idea to make `indiehosters/hoster-data` a git repo, so
+If you're used to working with git as a versioning tool, then it's a good idea to make `indiehosters/hoster-data` a (private!) git repo, so
 that you can track changes over time, and search the history to resolve mysteries when they occur. You may also use a different
 versioning system, or just take weekly and daily backups (but then it's probably a good idea to retain the weeklies for a couple
 of years, and even then it will not be as complete as a history in a versioning system).
 
 The per-server orchestration data is about what a specific one of your servers *should* be doing at this moment.
 This is fed into CoreOS (systemd -> etcd -> confd -> docker) to make sure the server actually starts and keeps doing these things,
-and also into monitoring, to make sure we get alerted when a server misbehaves.
+and also into monitoring, to make sure you get alerted when a server misbehaves.
 
-The DNR, TLS, and DNS folders under orchestration are for you to keep track of Domain Name Registration, Transport
-Layer Security, and Domain Name System services which you are probably reselling to your customers, alongside the services which
+The DNR, TLS, MON, and DNS folders under orchestration are for you to keep track of Domain Name Registration, Transport
+Layer Security, MONitoring, and Domain Name System services which you are probably getting from
+third-party service providers, alongside the services which
 you run on your own servers.
-Note that although it's probably inevitable that you resell DNR and TLS services from some third party, you may not be reselling DNS
+Note that although it's probably inevitable that you resell DNR and TLS services from some third party, and your monitoring would ideally
+also run on a system that's decoupled from your actual servers, you may not be reselling DNS
 hosting. If you host DNS for your customer on server-wide bind services that directly read data from files on the per-user data folders,
 then you don't need this folder, and instead DNS data will be under `indiehosters/infrastructure/user-data`.
 
@@ -87,7 +91,9 @@ them every few months. It might even
 make sense to dual-boot your laptop or boot from a live disk which resets on boot to make sure everything you do with IndieHosters data
 is done in a sterile environment.
 
-# How strict is this folder structure?
-You can of course use any folder structure you want, as long as it doesn't change the format of each user-data folder, so that
-your customers can still migrate at will between you and other IndieHosters. However, the scripts in this repo do rely on
+# Do I have to use this?
+You can of course use any folder structure and scripts you want, as long as it doesn't change the format of each user-data folder, so that
+your customers can still migrate at will between you and other IndieHosters. However, you might find some of the scripts in this repo
+helpful at some point, and they (will) rely on
 `../infrastructure`, `../dockerfiles`, and `../hoster-data/orchestration/per-server` to be where they are in the diagram above.
+That's why it makes sense to create this folder structure now, and then continue to [deploying a server](deploying-a-server.md)! :)
