@@ -10,7 +10,8 @@ on your laptop.
 * Give it a name (in this example, we call the server 'k3')
 * Create an empty folder `indiehosters/orchestration/per-server/k3/sites` (replace 'k3' with your server's domain name)
 * Add k3 to your /etc/hosts with the right IP address
-* Run `deploy/deploy.sh k3`
+* If you have used this name before, run `./deploy/forget-server-fingerprint.sh k3`
+* From the `indiehosters/dev-scripts` folder, run `sh ./deploy/deploy.sh k3`
 * This will ask for the ssh password once; the rest should be automatic!
 
 ### Adding a website to your server
