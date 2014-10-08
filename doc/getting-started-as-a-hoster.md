@@ -29,7 +29,7 @@ create a folder structure as follows:
                 |                 |
                 |                 -- TLS --- approved-certs
                 |                         |
-                -- user-data --- backups  -- cert
+                -- user-data --- backup   -- cert
                               |           |
                               -- live     -- chain
                                           |
@@ -91,6 +91,10 @@ ever lose it, no matter what calamity may strike. Once a month, put a copy of it
 
 You may give a trusted person an emergency key to your infrastructure, in case you walk under a bus. Think about the risk of data loss and
 establish an emergency recovery plan for when, for instance, the hard disk of your laptop or of one of your servers die.
+
+Make sure you often rsync the live data from each of your servers to indiehosters/user-data/live/{servername}/{domain} and store snapshots
+regularly (for instance to indiehosters/user-data/backup). Users *will* contact you sooner or later asking for "the backup from last Tuesday"
+and they will expect you to have one.
 
 # Basic digital hygiene
 At the same time, be careful who may obtain access to your critical data. Is your laptop really safe? Does the NSA have access to the servers you run?
