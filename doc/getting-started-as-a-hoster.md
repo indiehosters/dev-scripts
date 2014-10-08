@@ -27,11 +27,15 @@ create a folder structure as follows:
                 |                 |
                 |                 -- per-server
                 |                 |
-                |                 -- TLS
-                |
-                -- user-data --- backups
-                              |
-                              -- live
+                |                 -- TLS --- approved-certs
+                |                         |
+                -- user-data --- backups  -- cert
+                              |           |
+                              -- live     -- chain
+                                          |
+                                          -- combined
+                                          |
+                                          -- key
 ```
 The `infrastructure`, `dockerfiles`, and `dev-scripts` folders are the corresponding repos under https://github.com/indiehosters.
 
