@@ -46,3 +46,13 @@ on your laptop.
     that the site is installed in a state where any visitor can take control over it.
   * Switch DNS and note down the current DNS situation in `indiehosters/orchestration/DNS/example.com` (or if you're hosting
     a subdomain of another domain, update whichever is the zone file you edited).
+
+## Deploying a mailserver
+
+Right now, this is still a bit separate from the rest of the infrastructure - just get a server with Docker (doesn't have to be coreos), and run:
+
+```bash
+docker run -d -p 25:25 -p 443:443 indiehosters/yunohost /sbin/init
+```
+
+Then set up the mail domains and forwards through the web interface (with self-signed cert) on https://server.com/
