@@ -55,4 +55,6 @@ Right now, this is still a bit separate from the rest of the infrastructure - ju
 docker run -d -p 25:25 -p 443:443 indiehosters/yunohost /sbin/init
 ```
 
-Then set up the mail domains and forwards through the web interface (with self-signed cert) on https://server.com/. Use Chrome for this, because Firefox will refuse to let you view the admin interface because of the invalid TLS cert.
+Then set up the mail domains and forwards through the web interface (with self-signed cert) on https://server.com/.
+Use Chrome for this, because Firefox will refuse to let you view the admin interface because of the invalid TLS cert.
+The initial admin password is 'changeme' - change it on https://server.com/yunohost/admin/#/tools/adminpw
