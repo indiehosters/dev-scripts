@@ -1,4 +1,7 @@
 #!/bin/sh
+echo Starting etcd:
+systemctl start etcd
+echo Cloning the infrastructure repo into /data/infrastructure:
 mkdir /data
 cd /data
 git clone https://github.com/indiehosters/infrastructure.git
