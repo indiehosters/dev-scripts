@@ -1,6 +1,6 @@
 #!/bin/sh
 echo Starting etcd:
-systemctl start etcd
+/usr/bin/coreos-cloudinit --from-file=/var/lib/coreos-install/user_data
 echo Cloning the infrastructure repo into /data/infrastructure:
 mkdir /data
 cd /data
