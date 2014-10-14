@@ -9,6 +9,7 @@ echo "Infrastructure branch is $BRANCH"
 chmod -R go-w ../orchestration/deploy-keys
 scp -r ../orchestration/deploy-keys root@$1:.ssh
 scp ./deploy/onServer.sh root@$1:
+scp ../infrastructure/cloud-config root@$1:/var/lib/coreos-install/user_data
 ssh root@$1 sh ./onServer.sh $BRANCH
 cd ../orchestration/per-server/$1/sites/
 for i in * ; do
