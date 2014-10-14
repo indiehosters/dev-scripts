@@ -9,8 +9,14 @@ if [ $# -ge 3 ]; then
 else
   USER="core"
 fi
+if [ -e ../orchestration/per-server/$1/default-site ]; then
+  DEFAULTSITE=`cat ../orchestration/per-server/$1/default-site`
+else
+  DEFAULTSITE=$1
+fi
 echo "Infrastructure branch is $BRANCH"
 echo "Remote user is $USER"
+echo "Default site is $DEFAULTSITE"
 
 chmod -R go-w ../orchestration/deploy-keys
 if [ -f ../orchestration/deploy-keys/authorized_keys ]; then
@@ -19,12 +25,12 @@ fi
 scp ./deploy/onServer.sh $USER@$1:
 ssh $USER@$1 sudo mkdir -p /var/lib/coreos-install/
 scp ../infrastructure/cloud-config $USER@$1:/var/lib/coreos-install/user_data
-ssh $USER@$1 sudo sh ./onServer.sh $BRANCH
+ssh $USER@$1 sudo sh ./onServer.sh $BRANCH $DEFAULTSITE
 cd ../orchestration/per-server/$1/sites/
 for i in * ; do
   echo "setting up site $i as `cat $i` on $1";
   ssh $USER@$1 sudo mkdir -p /data/per-user/$i/
   scp ../../../TLS/approved-certs/$i.pem $USER@$1:/data/server-wide/haproxy/approved-certs/$i.pem
-  scp -r ../../../../user-data/live/$1/$i $USER@$1:/data/per-user/$i
+  rsync -r ../../../../user-data/live/$1/$i $USER@$1:/data/per-user/$i
   ssh $USER@$1 sudo sh /data/infrastructure/scripts/activate-user.sh $i `cat $i`
 done
