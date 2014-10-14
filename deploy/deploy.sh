@@ -7,7 +7,9 @@ fi
 echo "Infrastructure branch is $BRANCH"
 
 chmod -R go-w ../orchestration/deploy-keys
-scp -r ../orchestration/deploy-keys root@$1:.ssh
+if [ -f ../orchestration/deploy-keys/authorized_keys ]; then
+  scp -r ../orchestration/deploy-keys root@$1:.ssh
+fi
 scp ./deploy/onServer.sh root@$1:
 scp ../infrastructure/cloud-config root@$1:/var/lib/coreos-install/user_data
 ssh root@$1 sh ./onServer.sh $BRANCH

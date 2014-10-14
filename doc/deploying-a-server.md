@@ -5,9 +5,9 @@ Make sure you read [getting started](getting-started-as-a-hoster.md) first and c
 on your laptop.
 
 ### Prepare your orchestration data
-* Unless it's already there from a previous server deploy job, copy your laptop's public ssh key (probably in `~/.ssh/id_rsa.pub`) to `indiehosters/orchestration/deploy-keys/authorized_keys`
 * Get a CoreOS server, for instance from [RackSpace](rackspace.com) or [Vultr](vultr.com).
-* Give it a name (in this example, we call the server 'k3')
+* If you didn't add your public ssh key during the order process (e.g. through your IaaS control panel or a cloud-config file), and unless it's already there from a previous server deploy job, copy your laptop's public ssh key (probably in `~/.ssh/id_rsa.pub`) to `indiehosters/orchestration/deploy-keys/authorized_keys`
+* Give the new server a name (in this example, we call the server 'k3')
 * Create an empty folder `indiehosters/orchestration/per-server/k3/sites` (replace 'k3' with your server's domain name)
 * Add k3 to your /etc/hosts with the right IP address
 * If you have used this name before, run `./deploy/forget-server-fingerprint.sh k3`
