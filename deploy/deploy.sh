@@ -1,23 +1,29 @@
 #!/bin/sh
-if [ $# -eq 2 ]; then
+if [ $# -ge 2 ]; then
   BRANCH=$2
 else
   BRANCH="master"
 fi
+if [ $# -ge 3 ]; then
+  USER=$3
+else
+  USER="core"
+fi
 echo "Infrastructure branch is $BRANCH"
+echo "Remote user is $USER"
 
 chmod -R go-w ../orchestration/deploy-keys
 if [ -f ../orchestration/deploy-keys/authorized_keys ]; then
-  scp -r ../orchestration/deploy-keys root@$1:.ssh
+  scp -r ../orchestration/deploy-keys $USER@$1:.ssh
 fi
-scp ./deploy/onServer.sh root@$1:
-ssh root@$1 mkdir -p /var/lib/coreos-install/
-scp ../infrastructure/cloud-config root@$1:/var/lib/coreos-install/user_data
-ssh root@$1 sh ./onServer.sh $BRANCH
+scp ./deploy/onServer.sh $USER@$1:
+ssh $USER@$1 sudo mkdir -p /var/lib/coreos-install/
+scp ../infrastructure/cloud-config $USER@$1:/var/lib/coreos-install/user_data
+ssh $USER@$1 sudo sh ./onServer.sh $BRANCH
 cd ../orchestration/per-server/$1/sites/
 for i in * ; do
   echo "setting up site $i as `cat $i` on $1";
-  ssh root@$1 mkdir -p /data/per-user/$i/
-  scp ../../../TLS/approved-certs/$i.pem root@$1:/data/per-user/$i/combined.pem
-  ssh root@$1 sudo sh /data/infrastructure/scripts/approve-user.sh $i `cat $i`
+  ssh $USER@$1 sudo mkdir -p /data/per-user/$i/
+  scp ../../../TLS/approved-certs/$i.pem $USER@$1:/data/per-user/$i/combined.pem
+  ssh $USER@$1 sudo sh /data/infrastructure/scripts/approve-user.sh $i `cat $i`
 done
