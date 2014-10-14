@@ -24,6 +24,7 @@ cd ../orchestration/per-server/$1/sites/
 for i in * ; do
   echo "setting up site $i as `cat $i` on $1";
   ssh $USER@$1 sudo mkdir -p /data/per-user/$i/
-  scp ../../../TLS/approved-certs/$i.pem $USER@$1:/data/per-user/$i/combined.pem
-  ssh $USER@$1 sudo sh /data/infrastructure/scripts/approve-user.sh $i `cat $i`
+  scp ../../../TLS/approved-certs/$i.pem $USER@$1:/data/server-wide/haproxy/approved-certs/$i.pem
+  scp -r ../../../../user-data/$1/$i $USER@$1:/data/per-user/$i
+  ssh $USER@$1 sudo sh /data/infrastructure/scripts/activate-user.sh $i `cat $i`
 done
